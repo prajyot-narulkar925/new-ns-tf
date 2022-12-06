@@ -1,0 +1,25 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: tf-test
+spec:
+  interval: 1m
+  url: https://github.com/prajyot-narulkar925/new-ns-tf
+  ref:
+    branch: main
+---
+apiVersion: infra.contrib.fluxcd.io/v1alpha1
+kind: Terraform
+metadata:
+  name: instance-terraform
+  namespace: new-ns
+spec:
+  path: ./terraform
+  approvePlan: auto
+  interval: 1m
+  sourceRef:
+    kind: GitRepository
+    name: tf-test
+  writeOutputsToSecret:
+    name: instance-outputs
