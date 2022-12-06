@@ -7,7 +7,7 @@ spec:
   interval: 1m
   url: https://github.com/prajyot-narulkar925/new-ns-tf
   ref:
-    branch: main
+    branch: master
 ---
 apiVersion: infra.contrib.fluxcd.io/v1alpha1
 kind: Terraform
@@ -21,5 +21,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: tf-test
+    namespace: flux-system
   writeOutputsToSecret:
     name: instance-outputs
